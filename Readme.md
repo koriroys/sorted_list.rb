@@ -14,7 +14,7 @@ Examples
 Sorted forwards:
 
 ```ruby
-list = LinkedList.new do |left, right|
+list = SortedList.new do |left, right|
   left <=> right
 end
 
@@ -24,7 +24,7 @@ list.to_a # => [3, 2, 1]
 
 Sorted backwards:
 ```ruby
-list = LinkedList.new do |left, right|
+list = SortedList.new do |left, right|
   right <=> left
 end
 
