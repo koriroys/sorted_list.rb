@@ -7,6 +7,10 @@ class SortedList
       def add(data)
         Node.new data, self
       end
+
+      def remove(data)
+        self
+      end
     end
 
     def initialize(data, next_node)
@@ -15,7 +19,14 @@ class SortedList
     end
 
     def add(data)
-      next_node = next_node.add data
+      self.next_node = next_node.add data
+      self
+    end
+
+    def remove(data)
+      return next_node if data == self.data
+      self.next_node = next_node.remove data
+      self
     end
 
     def each(&block)
@@ -23,7 +34,7 @@ class SortedList
       next_node.each(&block)
     end
 
-    private
+    protected
 
     attr_accessor :data, :next_node
   end
@@ -38,6 +49,10 @@ class SortedList
 
   def add(data)
     self.head = head.add data
+  end
+
+  def remove(data)
+    self.head = head.remove data
   end
 
   def each(&block)

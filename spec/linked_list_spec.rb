@@ -7,16 +7,49 @@ describe SortedList do
   let(:list) { SortedList.new }
 
   it 'can add data' do
+    list.should_not include 1
     list.should_not include 2
+    list.add 1
     list.add 2
+    list.should include 1
     list.should include 2
   end
 
-  it 'when removing data: does nothing when told to remove data it does not have'
-  it 'when removing data: removes the first occurrence when it has duplicates'
-  it 'when removing data: can remove the first piece of data'
-  it 'when removing data: can remove the last piece of data'
-  it 'when removing data: can remove an intermediate piece of data'
+  it 'when removing data: does nothing when told to remove data it does not have' do
+    list.remove 2
+    list.should_not include 2
+  end
+
+  it 'when removing data: removes the first occurrence when it has duplicates' do
+    list.add 1
+    list.add 1
+    list.remove 1
+    list.should include 1
+  end
+
+  it 'when removing data: can remove the first piece of data' do
+    list.add 2
+    list.remove 2
+    list.should_not include 2
+  end
+
+  it 'when removing data: can remove the last piece of data' do
+    list.add 2
+    list.add 1
+    list.remove 2
+    list.should include 1
+    list.should_not include 2
+  end
+
+  it 'when removing data: can remove an intermediate piece of data' do
+    list.add 3
+    list.add 2
+    list.add 1
+    list.remove 2
+    list.should include 1
+    list.should_not include 2
+    list.should include 3
+  end
 
   it 'enumerable methods: iterates over nothing when has no data'
   it 'enumerable methods: defines #each'
