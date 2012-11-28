@@ -26,7 +26,7 @@ list = SortedList.new do |left, right|
   left <=> right
 end
 
-list << 3 << 1 << 2
+list.add(3).add(1).add(2)
 list.to_a # => [3, 2, 1]
 ```
 
@@ -36,7 +36,7 @@ list = SortedList.new do |left, right|
   right <=> left
 end
 
-list << 'c' << 'a' << 'b'
+list.add('c').add('a').add('b')
 list.to_a # => ["c", "b", "a"]
 ```
 
