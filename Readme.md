@@ -36,4 +36,5 @@ Usage:
 ------
 
 * Install dependencies (rspec) with `$ bundle`
-* Run specs with `$ rspec`
+* Run specs with `$ rake`
+* When developing, run specs until first failure with `$ rake spec:dev`
