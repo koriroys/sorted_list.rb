@@ -63,8 +63,7 @@ end
 
 def SortedList(*data, &comparer)
   list = SortedList.new &comparer
-  data.each { |item| list.add item }
-  list
+  data.reduce list, :add
 end
 
 class SortedList
@@ -77,6 +76,7 @@ class SortedList
 
   def add(data)
     self.head = head.add data
+    self
   end
 
   def remove(data)
