@@ -8,7 +8,7 @@ describe SortedList do
 
   it 'can add data' do
     list.should_not include 2
-    list << 2
+    list.add 2
     list.should include 2
   end
 

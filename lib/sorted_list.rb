@@ -4,7 +4,7 @@ class SortedList
       def each
       end
 
-      def <<(data)
+      def add(data)
         Node.new data, self
       end
     end
@@ -14,8 +14,8 @@ class SortedList
       self.next_node = next_node
     end
 
-    def <<(data)
-      next_node = next_node << data
+    def add(data)
+      next_node = next_node.add data
     end
 
     def each(&block)
@@ -36,8 +36,8 @@ class SortedList
     self.head = Node::Null.new
   end
 
-  def <<(data)
-    self.head = head << data
+  def add(data)
+    self.head = head.add data
   end
 
   def each(&block)
