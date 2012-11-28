@@ -31,7 +31,7 @@ class SortedList
     end
 
     def add(data)
-      if im_less_than? data
+      if self < data
         self.next_node = next_node.add data
         self
       else
@@ -54,7 +54,7 @@ class SortedList
 
     attr_accessor :data, :next_node, :comparer
 
-    def im_less_than?(data)
+    def <(data)
       comparer.call(self.data, data) <= 0
     end
   end
