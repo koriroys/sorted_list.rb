@@ -8,6 +8,12 @@ to the first node in the list, though this method can be private.
 
 It expects each node to have a method `next_node` to the next node in the list.
 
+Purpose
+-------
+
+To provide a fun but nontrivial problem to solve. To play with the idea of
+storing blocks for later use.
+
 Examples
 --------
 
