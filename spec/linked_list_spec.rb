@@ -93,8 +93,29 @@ describe SortedList do
     list.to_a.should == [3, 2, 1]
   end
 
-  it 'can store multiples of the same data'
-  it 'knows its size'
+  it 'can store multiples of the same data' do
+    list.add 1
+    list.add 2
+    list.add 1
+    list.to_a.should == [1, 1, 2]
+  end
+
+  it 'knows its size' do
+    list.size.should == 0
+    list.add 1
+    list.size.should == 1
+    list.add 2
+    list.size.should == 2
+    list.add 1
+    list.size.should == 3
+    list.remove 1
+    list.size.should == 2
+    list.remove 1
+    list.size.should == 1
+    list.remove 1
+    list.size.should == 1
+  end
+
   it 'inspects to List(datum, datum, datum)'
   it 'List(datum, datum, datum) constructs a list of the data'
 end

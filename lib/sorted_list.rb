@@ -81,6 +81,10 @@ class SortedList
     head.each &block
   end
 
+  def size
+    inject(0) { |sum, _| sum + 1 }
+  end
+
   protected
 
   def default_comparer
