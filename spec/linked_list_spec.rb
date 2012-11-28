@@ -71,7 +71,12 @@ describe SortedList do
     list.to_a.should == [1, 2]
   end
 
-  it 'stores the data in a list of nodes linked to each other'
+  it 'stores the data in a list of nodes linked to each other' do
+    list.add 1
+    list.add 2
+    list.send(:head).send(:data).should == 1
+    list.send(:head).send(:next_node).send(:data).should == 2
+  end
 
   it 'stores the data sorted by <=> when not initialized with a block'
   it 'stores the data sorted by the block when initialized with a block'
