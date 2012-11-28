@@ -1,13 +1,12 @@
 class SortedList
   class Node
-
-
     class Null
       def initialize(&comparer)
         self.comparer = comparer
       end
 
       def each
+        # no-op
       end
 
       def add(data)
@@ -22,8 +21,10 @@ class SortedList
 
       attr_accessor :comparer
     end
+  end
 
 
+  class Node
     def initialize(data, next_node, &comparer)
       self.comparer  = comparer
       self.data      = data
@@ -47,7 +48,7 @@ class SortedList
 
     def each(&block)
       block.call data
-      next_node.each(&block)
+      next_node.each &block
     end
 
     protected

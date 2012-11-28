@@ -36,9 +36,9 @@ class SortedList
 
   protected
 
+  attr_accessor :head, :comparer
+
   def default_comparer
     lambda { |left, right| left <=> right }
   end
-
-  attr_accessor :head, :comparer
 end
