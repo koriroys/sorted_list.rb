@@ -9,8 +9,7 @@ describe SortedList do
   it 'can add data' do
     list.should_not include 1
     list.should_not include 2
-    list.add 1
-    list.add 2
+    list.add(1).add(2)
     list.should include 1
     list.should include 2
   end
@@ -21,8 +20,7 @@ describe SortedList do
   end
 
   it 'when removing data: removes the first occurrence when it has duplicates' do
-    list.add 1
-    list.add 1
+    list.add(1).add(1)
     list.remove 1
     list.should include 1
   end
@@ -34,17 +32,14 @@ describe SortedList do
   end
 
   it 'when removing data: can remove the last piece of data' do
-    list.add 2
-    list.add 1
+    list.add(2).add(1)
     list.remove 2
     list.should include 1
     list.should_not include 2
   end
 
   it 'when removing data: can remove an intermediate piece of data' do
-    list.add 3
-    list.add 2
-    list.add 1
+    list.add(3).add(2).add(1)
     list.remove 2
     list.should include 1
     list.should_not include 2
@@ -56,8 +51,7 @@ describe SortedList do
   end
 
   it 'enumerable methods: defines #each' do
-    list.add 1
-    list.add 2
+    list.add(1).add(2)
     ary = []
     list.each { |data| ary << data }
     ary.should == [1, 2]
@@ -65,38 +59,30 @@ describe SortedList do
 
   # only checking map and to_a, but this represents that the Enumerable module is included
   it 'enumerable methods: can do any of the enumerable methods' do
-    list.add 1
-    list.add 2
+    list.add(1).add(2)
     list.map { |data| data }.should == [1, 2]
     list.to_a.should == [1, 2]
   end
 
   it 'stores the data in a list of nodes linked to each other' do
-    list.add 1
-    list.add 2
+    list.add(1).add(2)
     list.send(:head).send(:data).should == 1
     list.send(:head).send(:next_node).send(:data).should == 2
   end
 
   it 'stores the data sorted by <=> when not initialized with a block' do
-    list.add 3
-    list.add 1
-    list.add 2
+    list.add(3).add(1).add(2)
     list.to_a.should == [1, 2, 3]
   end
 
   it 'stores the data sorted by the block when initialized with a block' do
     list = SortedList.new { |left, right| right <=> left }
-    list.add 3
-    list.add 1
-    list.add 2
+    list.add(3).add(1).add(2)
     list.to_a.should == [3, 2, 1]
   end
 
   it 'can store multiples of the same data' do
-    list.add 1
-    list.add 2
-    list.add 1
+    list.add(1).add(2).add(1)
     list.to_a.should == [1, 1, 2]
   end
 
