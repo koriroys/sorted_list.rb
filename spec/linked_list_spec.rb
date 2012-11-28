@@ -51,9 +51,25 @@ describe SortedList do
     list.should include 3
   end
 
-  it 'enumerable methods: iterates over nothing when has no data'
-  it 'enumerable methods: defines #each'
-  it 'enumerable methods: can do any of the enumerable methods'
+  it 'enumerable methods: iterates over nothing when has no data' do
+    list.each { |data| raise 'this should never be invoked' }
+  end
+
+  it 'enumerable methods: defines #each' do
+    list.add 1
+    list.add 2
+    ary = []
+    list.each { |data| ary << data }
+    ary.should == [1, 2]
+  end
+
+  # only checking map and to_a, but this represents that the Enumerable module is included
+  it 'enumerable methods: can do any of the enumerable methods' do
+    list.add 1
+    list.add 2
+    list.map { |data| data }.should == [1, 2]
+    list.to_a.should == [1, 2]
+  end
 
   it 'stores the data in a list of nodes linked to each other'
 
