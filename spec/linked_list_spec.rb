@@ -4,7 +4,13 @@ require 'sorted_list'
 # contexts are all run together at the end and I want to preserve the order
 
 describe SortedList do
-  it 'can add data'
+  let(:list) { SortedList.new }
+
+  it 'can add data' do
+    list.should_not include 2
+    list << 2
+    list.should include 2
+  end
 
   it 'when removing data: does nothing when told to remove data it does not have'
   it 'when removing data: removes the first occurrence when it has duplicates'
