@@ -1,17 +1,13 @@
-
-desc 'Run all the specs'
-task :spec do
-  sh 'rspec', '-c', '--format', 'documentation'
+def run_spec(*additional_options)
+  sh 'rspec', '-c', '--format', 'documentation', *additional_options
 end
 
+desc 'Run all the specs'
+task(:spec) { run_spec }
 
 namespace :spec do
-  task :fail_fast do
-    ENV['RSPEC_OPTIONS'] = '--fail-fast'
-  end
-
   desc 'Run the specs but stop after the first failure'
-  task :dev => [:fail_fast, :spec]
+  task(:dev) { run_spec '--fail-fast' }
 end
 
 
