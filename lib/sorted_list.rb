@@ -61,6 +61,12 @@ class SortedList
   end
 end
 
+def SortedList(*data, &comparer)
+  list = SortedList.new &comparer
+  data.each { |item| list.add item }
+  list
+end
+
 class SortedList
   include Enumerable
 
@@ -86,7 +92,7 @@ class SortedList
   end
 
   def inspect
-    "List(#{map(&:inspect).join ', '})"
+    "SortedList(#{map(&:inspect).join ', '})"
   end
 
   protected

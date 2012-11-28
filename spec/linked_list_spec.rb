@@ -117,14 +117,17 @@ describe SortedList do
   end
 
   it 'inspects to List(datum, datum, datum)' do
-    list.inspect.should == 'List()'
+    list.inspect.should == 'SortedList()'
     list.add 'a'
-    list.inspect.should == 'List("a")'
+    list.inspect.should == 'SortedList("a")'
     list.add 'c'
-    list.inspect.should == 'List("a", "c")'
+    list.inspect.should == 'SortedList("a", "c")'
     list.add 'b'
-    list.inspect.should == 'List("a", "b", "c")'
+    list.inspect.should == 'SortedList("a", "b", "c")'
   end
 
-  it 'List(datum, datum, datum) constructs a list of the data'
+  it 'SortedList(datum, datum, datum) { sorter } constructs a list of the data' do
+    SortedList(1,5,3,2,4).to_a.should == [1, 2, 3, 4, 5]
+    SortedList(1,5,3,2,4) { |left, right| right <=> left }.to_a.should == [5, 4, 3, 2 ,1]
+  end
 end
