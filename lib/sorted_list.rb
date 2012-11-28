@@ -85,6 +85,10 @@ class SortedList
     inject(0) { |sum, _| sum + 1 }
   end
 
+  def inspect
+    "List(#{map(&:inspect).join ', '})"
+  end
+
   protected
 
   def default_comparer

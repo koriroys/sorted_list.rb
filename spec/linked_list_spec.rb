@@ -116,6 +116,15 @@ describe SortedList do
     list.size.should == 1
   end
 
-  it 'inspects to List(datum, datum, datum)'
+  it 'inspects to List(datum, datum, datum)' do
+    list.inspect.should == 'List()'
+    list.add 'a'
+    list.inspect.should == 'List("a")'
+    list.add 'c'
+    list.inspect.should == 'List("a", "c")'
+    list.add 'b'
+    list.inspect.should == 'List("a", "b", "c")'
+  end
+
   it 'List(datum, datum, datum) constructs a list of the data'
 end
