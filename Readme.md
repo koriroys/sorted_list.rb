@@ -8,6 +8,8 @@ to the first node in the list, though this method can be private.
 
 It expects each node to have a method `next_node` to the next node in the list.
 
+Solution is in branch [solved](https://github.com/JoshCheek/sorted_list.rb/tree/solved).
+
 Purpose
 -------
 
