@@ -1,26 +1,19 @@
 class SortedList
   class Node
-    class Null
-      def each
-      end
-
-      def add(data)
-        Node.new data, self
-      end
-
-      def remove(data)
-        self
-      end
-    end
-
-    def initialize(data, next_node)
+    def initialize(comparer, data, next_node)
+      raise unless comparer
+      self.comparer  = comparer
       self.data      = data
       self.next_node = next_node
     end
 
     def add(data)
-      self.next_node = next_node.add data
-      self
+      if im_less_than? data
+        self.next_node = next_node.add data
+        self
+      else
+        Node.new comparer, data, self
+      end
     end
 
     def remove(data)
@@ -36,15 +29,45 @@ class SortedList
 
     protected
 
-    attr_accessor :data, :next_node
+    attr_accessor :data, :next_node, :comparer
+
+    def im_less_than?(data)
+      comparer.call(self.data, data) <= 0
+    end
+  end
+end
+
+class SortedList
+  class Node
+    class Null
+      def initialize(comparer)
+        self.comparer = comparer
+      end
+
+      def each
+      end
+
+      def add(data)
+        Node.new comparer, data, self
+      end
+
+      def remove(data)
+        self
+      end
+
+      private
+
+      attr_accessor :comparer
+    end
   end
 end
 
 class SortedList
   include Enumerable
 
-  def initialize
-    self.head = Node::Null.new
+  def initialize(&comparer)
+    self.comparer = comparer || default_comparer
+    self.head = Node::Null.new self.comparer
   end
 
   def add(data)
@@ -59,7 +82,11 @@ class SortedList
     head.each &block
   end
 
-  private
+  protected
 
-  attr_accessor :head
+  def default_comparer
+    lambda { |left, right| left <=> right }
+  end
+
+  attr_accessor :head, :comparer
 end

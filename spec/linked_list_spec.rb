@@ -78,8 +78,20 @@ describe SortedList do
     list.send(:head).send(:next_node).send(:data).should == 2
   end
 
-  it 'stores the data sorted by <=> when not initialized with a block'
-  it 'stores the data sorted by the block when initialized with a block'
+  it 'stores the data sorted by <=> when not initialized with a block' do
+    list.add 3
+    list.add 1
+    list.add 2
+    list.to_a.should == [1, 2, 3]
+  end
+
+  it 'stores the data sorted by the block when initialized with a block' do
+    list = SortedList.new { |left, right| right <=> left }
+    list.add 3
+    list.add 1
+    list.add 2
+    list.to_a.should == [3, 2, 1]
+  end
 
   it 'can store multiples of the same data'
   it 'knows its size'
