@@ -1,7 +1,6 @@
 class SortedList
   class Node
-    def initialize(comparer, data, next_node)
-      raise unless comparer
+    def initialize(data, next_node, &comparer)
       self.comparer  = comparer
       self.data      = data
       self.next_node = next_node
@@ -12,7 +11,7 @@ class SortedList
         self.next_node = next_node.add data
         self
       else
-        Node.new comparer, data, self
+        Node.new data, self, &comparer
       end
     end
 
@@ -40,7 +39,7 @@ end
 class SortedList
   class Node
     class Null
-      def initialize(comparer)
+      def initialize(&comparer)
         self.comparer = comparer
       end
 
@@ -48,7 +47,7 @@ class SortedList
       end
 
       def add(data)
-        Node.new comparer, data, self
+        Node.new data, self, &comparer
       end
 
       def remove(data)
@@ -67,7 +66,7 @@ class SortedList
 
   def initialize(&comparer)
     self.comparer = comparer || default_comparer
-    self.head = Node::Null.new self.comparer
+    self.head = Node::Null.new &self.comparer
   end
 
   def add(data)
