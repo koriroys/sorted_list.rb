@@ -13,6 +13,7 @@ class SortedList
   end
 
   def remove(node)
-    @nodes.delete(node)
+    index = @nodes.index(node)
+    @nodes.delete_at(index) unless index.nil?
   end
 end
