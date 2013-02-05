@@ -16,4 +16,8 @@ class SortedList
     index = @nodes.index(node)
     @nodes.delete_at(index) unless index.nil?
   end
+
+  def each
+    return if @nodes.empty?
+  end
 end
