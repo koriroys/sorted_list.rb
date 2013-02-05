@@ -5,6 +5,8 @@ end
 desc 'Run all the specs'
 task(:spec) { run_spec }
 
+task(:ff) { run_spec('--fail-fast') }
+
 namespace :spec do
   desc 'Run the specs but stop after the first failure'
   task(:dev) { run_spec '--fail-fast' }
