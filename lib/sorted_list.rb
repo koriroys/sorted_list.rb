@@ -1,4 +1,6 @@
 class SortedList
+  include Enumerable
+
   def initialize
     @nodes = []
   end
