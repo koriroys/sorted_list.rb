@@ -29,6 +29,14 @@ class SortedList
     @nodes.size
   end
 
+  def inspect
+    "#{self.class}(#{inspect_list})"
+  end
+
+  def inspect_list
+    node_data.map{ |datum| datum.inspect }.join(", ")
+  end
+
   def relink_nodes
     @nodes.sort! &@block
   end
