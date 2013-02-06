@@ -5,22 +5,49 @@ class SortedList
     @nodes = []
   end
 
-  def add(node)
-    @nodes << node
+  def node_data
+    @nodes.map(&:data)
+  end
+
+  def add(data)
+    if @nodes.empty?
+      @nodes << Node.new(data)
+    else
+      parent_node = @nodes.last
+      next_node = Node.new(data)
+      @nodes << next_node
+      parent_node.next_node = next_node
+    end
     self
   end
 
-  def include?(node)
-    @nodes.include?(node)
+  def include?(data)
+    node_data.any?{ |datum| datum == data }
   end
 
   def remove(node)
-    index = @nodes.index(node)
+    index = node_data.index(node)
     @nodes.delete_at(index) unless index.nil?
   end
 
   def each &block
     return if @nodes.empty?
-    @nodes.each &block
+    node_data.each &block
+  end
+
+  def head
+    @nodes.first
+  end
+end
+
+class Node
+  attr_accessor :next_node
+
+  def initialize(data)
+    @data = data
+  end
+
+  def data
+    @data
   end
 end
