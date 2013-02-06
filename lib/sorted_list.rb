@@ -1,3 +1,5 @@
+require 'awesome_print'
+
 class SortedList
   include Enumerable
 
@@ -18,6 +20,7 @@ class SortedList
       @nodes << next_node
       parent_node.next_node = next_node
     end
+    @nodes.sort!
     self
   end
 
@@ -41,6 +44,8 @@ class SortedList
 end
 
 class Node
+  include Comparable
+
   attr_accessor :next_node
 
   def initialize(data)
@@ -49,5 +54,9 @@ class Node
 
   def data
     @data
+  end
+
+  def <=>(other)
+    data <=> other.data
   end
 end
