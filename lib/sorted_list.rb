@@ -25,6 +25,10 @@ class SortedList
     self
   end
 
+  def size
+    @nodes.size
+  end
+
   def relink_nodes
     @nodes.sort! &@block
   end
