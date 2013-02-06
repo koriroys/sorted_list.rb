@@ -3,8 +3,9 @@ require 'awesome_print'
 class SortedList
   include Enumerable
 
-  def initialize
+  def initialize(&block)
     @nodes = []
+    @block = block
   end
 
   def node_data
@@ -20,8 +21,12 @@ class SortedList
       @nodes << next_node
       parent_node.next_node = next_node
     end
-    @nodes.sort!
+    relink_nodes
     self
+  end
+
+  def relink_nodes
+    @nodes.sort! &@block
   end
 
   def include?(data)
