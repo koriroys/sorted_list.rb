@@ -58,6 +58,16 @@ class SortedList
   def head
     @nodes.first
   end
+
+  def to_a
+    node_data
+  end
+end
+
+def SortedList(*args, &block)
+  args.each.with_object(SortedList.new(&block)) do |node, list|
+    list.add(node)
+  end
 end
 
 class Node
